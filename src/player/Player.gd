@@ -72,18 +72,16 @@ func _play_engine_sfx(is_engine_on):
 		engine_sfx.stop()
 
 func _on_Player_body_entered(body):
-	if body is StartingPad:
+	if body is StartingPad and vel < 25:
 		return
-			
-	if not is_landed:
-		is_landed = true
-		print(vel)
-		
-		if body is LandingPad:
+
+	elif body is LandingPad:
+		if not is_landed:
+			is_landed = true
 			GameManager.landing(vel)
-		
-		else:
-			GameManager.total_failure()
+	
+	else:
+		GameManager.total_failure()
 
 func _onFuelEmpty():
 	noFuel = true
