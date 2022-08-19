@@ -39,6 +39,7 @@ config/icon="res://icon.png"
 [autoload]
 
 GameManager="*res://src/globals/GameManager.gd"
+MusicManager="*res://src/globals/MusicManager.gd"
 
 [display]
 

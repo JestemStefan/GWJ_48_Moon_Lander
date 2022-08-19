@@ -14,6 +14,7 @@ func _ready():
 func _on_Level_1_button_up():
 	print("Level 1 selected")
 	get_tree().change_scene("res://scenes/levels/Tutorial.tscn")
+	MusicManager.play_level_music()
 
 
 func _on_Level_2_button_up():
