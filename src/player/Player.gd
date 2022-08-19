@@ -5,6 +5,7 @@ var dir: Vector2
 var vel: float
 
 var is_landed: bool = false
+var noFuel: bool = false
 
 onready var engine_particles: Particles2D = $EngineParticles
 onready var engine_sfx: AudioStreamPlayer2D = $EngineSFX
@@ -13,6 +14,8 @@ onready var engine_sfx: AudioStreamPlayer2D = $EngineSFX
 onready var control_engine_particles_1: Particles2D = $ControlEngineParticles_1
 onready var control_engine_particles_2: Particles2D = $ControlEngineParticles_2
 onready var control_engine_sfx: AudioStreamPlayer2D = $ControlEginesSFX
+
+signal emitFuel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,7 +29,7 @@ func _process(delta):
 	$Label.text = "Velocity = " + str(int(vel))
 	
 	var input = self._get_input()
-	var is_engine_on: bool = input.y > 0
+	var is_engine_on: bool = input.y > 0 and not noFuel
 	
 	dir = Vector2.UP.rotated(rotation) * 60 if is_engine_on else Vector2.ZERO
 	engine_particles.emitting = is_engine_on
@@ -35,7 +38,9 @@ func _process(delta):
 
 	self._rotate(input.x)
 	apply_central_impulse(dir)
-
+	
+	if is_engine_on:
+		emit_signal("emitFuel")
 
 func _get_input():
 	if is_landed:
@@ -79,6 +84,6 @@ func _on_Player_body_entered(body):
 		
 		else:
 			GameManager.total_failure()
-		
-		
-	
+
+func _onFuelEmpty():
+	noFuel = true

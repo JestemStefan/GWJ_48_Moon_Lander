@@ -2,7 +2,7 @@ extends Node
 
 var player: Player = null
 
-var UI: Control = null
+var UI: CanvasLayer = null
 onready var landing_result_label: PackedScene = preload("res://scenes/UI/LandingResultLabel.tscn")
 onready var sfx_exposion: PackedScene = preload("res://scenes/SFX/Explosion.tscn")
 

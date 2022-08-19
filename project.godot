@@ -46,7 +46,6 @@ MusicManager="*res://src/globals/MusicManager.gd"
 window/size/width=1280
 window/size/height=640
 window/size/resizable=false
-window/size/borderless=true
 window/dpi/allow_hidpi=true
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
