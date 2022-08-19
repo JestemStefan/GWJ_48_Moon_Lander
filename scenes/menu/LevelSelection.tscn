@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://art/themes/LevelSelectTheme.tres" type="Theme" id=1]
 [ext_resource path="res://src/level_selection/LevelSelection.gd" type="Script" id=2]
+[ext_resource path="res://sound/sfx/Menu1_SelectA.wav" type="AudioStream" id=3]
+[ext_resource path="res://sound/sfx/Menu1_NavA.wav" type="AudioStream" id=4]
 
 [node name="LevelSelection" type="Control"]
 anchor_right = 1.0
@@ -65,8 +67,24 @@ enabled_focus_mode = 0
 text = "5"
 icon_align = 1
 
+[node name="HoverSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="ClickSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[connection signal="button_down" from="Level_1" to="." method="_on_Level_1_button_down"]
 [connection signal="button_up" from="Level_1" to="." method="_on_Level_1_button_up"]
+[connection signal="mouse_entered" from="Level_1" to="." method="_on_Level_1_mouse_entered"]
+[connection signal="button_down" from="Level_2" to="." method="_on_Level_2_button_down"]
 [connection signal="button_up" from="Level_2" to="." method="_on_Level_2_button_up"]
+[connection signal="mouse_entered" from="Level_2" to="." method="_on_Level_2_mouse_entered"]
+[connection signal="button_down" from="Level_3" to="." method="_on_Level_3_button_down"]
 [connection signal="button_up" from="Level_3" to="." method="_on_Level_3_button_up"]
+[connection signal="mouse_entered" from="Level_3" to="." method="_on_Level_3_mouse_entered"]
+[connection signal="button_down" from="Level_4" to="." method="_on_Level_4_button_down"]
 [connection signal="button_up" from="Level_4" to="." method="_on_Level_4_button_up"]
+[connection signal="mouse_entered" from="Level_4" to="." method="_on_Level_4_mouse_entered"]
+[connection signal="button_down" from="Level_5" to="." method="_on_Level_5_button_down"]
 [connection signal="button_up" from="Level_5" to="." method="_on_Level_5_button_up"]
+[connection signal="mouse_entered" from="Level_5" to="." method="_on_Level_5_mouse_entered"]

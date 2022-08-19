@@ -11,14 +11,10 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
 func _on_Level_1_button_up():
 	print("Level 1 selected")
 	get_tree().change_scene("res://scenes/levels/Tutorial.tscn")
+	MusicManager.play_level_music()
 
 
 func _on_Level_2_button_up():
@@ -35,3 +31,43 @@ func _on_Level_4_button_up():
 
 func _on_Level_5_button_up():
 	print("Level 5 selected")
+
+
+func _on_Level_1_mouse_entered():
+	$HoverSFX.play()
+
+
+func _on_Level_2_mouse_entered():
+	$HoverSFX.play()
+
+
+func _on_Level_3_mouse_entered():
+	$HoverSFX.play()
+
+
+func _on_Level_4_mouse_entered():
+	$HoverSFX.play()
+
+
+func _on_Level_5_mouse_entered():
+	$HoverSFX.play()
+
+
+func _on_Level_1_button_down():
+	$ClickSFX.play()
+
+
+func _on_Level_2_button_down():
+	$ClickSFX.play()
+
+
+func _on_Level_3_button_down():
+	$ClickSFX.play()
+
+
+func _on_Level_4_button_down():
+	$ClickSFX.play()
+
+
+func _on_Level_5_button_down():
+	$ClickSFX.play()

@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sfx_hiss.wav-7e39cfdbe48951a3bb7d1a633348243e.sample"
+
+[deps]
+
+source_file="res://sound/sfx/sfx_hiss.wav"
+dest_files=[ "res://.import/sfx_hiss.wav-7e39cfdbe48951a3bb7d1a633348243e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=4410
+edit/loop_end=44100
+compress/mode=0

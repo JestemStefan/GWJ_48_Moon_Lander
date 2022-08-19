@@ -8,8 +8,12 @@ var is_landed: bool = false
 var noFuel: bool = false
 
 onready var engine_particles: Particles2D = $EngineParticles
+onready var engine_sfx: AudioStreamPlayer2D = $EngineSFX
+
+
 onready var control_engine_particles_1: Particles2D = $ControlEngineParticles_1
 onready var control_engine_particles_2: Particles2D = $ControlEngineParticles_2
+onready var control_engine_sfx: AudioStreamPlayer2D = $ControlEginesSFX
 
 signal emitFuel
 
@@ -29,9 +33,10 @@ func _process(delta):
 	
 	dir = Vector2.UP.rotated(rotation) * 60 if is_engine_on else Vector2.ZERO
 	engine_particles.emitting = is_engine_on
+	self._play_engine_sfx(is_engine_on)
+	
 
 	self._rotate(input.x)
-	
 	apply_central_impulse(dir)
 	
 	if is_engine_on:
@@ -45,15 +50,26 @@ func _get_input():
 
 func _rotate(rotation):
 	apply_torque_impulse(rotation * deg2rad(90) * 100)
+	var is_rotating = bool(rotation)
 	
-	control_engine_particles_1.emitting = bool(rotation)
-	control_engine_particles_2.emitting = bool(rotation)
+	control_engine_particles_1.emitting = is_rotating
+	control_engine_particles_2.emitting = is_rotating
 	
 	control_engine_particles_1.rotation_degrees = 0 if rotation <= 0 else 180
 	control_engine_particles_2.rotation_degrees = 0 if rotation <= 0 else 180
 	
-		
+	if is_rotating:
+		if not control_engine_sfx.is_playing():
+			control_engine_sfx.play(0.0)
+	else:
+		control_engine_sfx.stop()
 	
+func _play_engine_sfx(is_engine_on):
+	if is_engine_on:
+		if not engine_sfx.is_playing():
+			engine_sfx.play(0.0)
+	else:
+		engine_sfx.stop()
 
 func _on_Player_body_entered(body):
 	if body is StartingPad:

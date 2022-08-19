@@ -11,14 +11,28 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+func _on_StartButton_button_down():
+	$ClickSFX.play()
 
 func _on_StartButton_button_up():
 	get_tree().change_scene("res://scenes/menu/LevelSelection.tscn")
-
+	
+func _on_ExitButton_button_down():
+	$ClickSFX.play()
 
 func _on_ExitButton_button_up():
+	$ClickSFX.play()
 	get_tree().quit()
+	
+func _on_StartButton_mouse_entered():
+	$HoverSFX.play()
+
+
+func _on_ExitButton_mouse_entered():
+	$HoverSFX.play()
+
+
+
+
+
+
