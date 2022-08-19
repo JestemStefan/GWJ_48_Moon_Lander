@@ -1,7 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://art/lander.png" type="Texture" id=2]
+[ext_resource path="res://sound/sfx/Game_Sound_Rocket_normal.ogg" type="AudioStream" id=3]
+[ext_resource path="res://sound/sfx/sfx_hiss.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 8, 9 )
@@ -133,5 +135,11 @@ lifetime = 0.2
 explosiveness = 0.07
 local_coords = false
 process_material = SubResource( 15 )
+
+[node name="EngineSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+
+[node name="ControlEginesSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
 
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]

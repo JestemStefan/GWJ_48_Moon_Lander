@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Game_Sound_Rocket_normal.ogg-049a85a5c022c66246f47547131ed42a.oggstr"
+
+[deps]
+
+source_file="res://sound/sfx/Game_Sound_Rocket_normal.ogg"
+dest_files=[ "res://.import/Game_Sound_Rocket_normal.ogg-049a85a5c022c66246f47547131ed42a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
