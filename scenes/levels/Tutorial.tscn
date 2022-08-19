@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/level_elements/StartingPad.tscn" type="PackedScene" id=4]
 [ext_resource path="res://art/arrows_up.png" type="Texture" id=5]
 [ext_resource path="res://src/ui/UI.gd" type="Script" id=6]
-[ext_resource path="res://art/themes/MainTheme.tres" type="Theme" id=7]
+[ext_resource path="res://scenes/UI/Counter.tscn" type="PackedScene" id=7]
 
 [node name="Level_Tutorial" type="Node2D"]
 
@@ -30,10 +30,7 @@ position = Vector2( 520, 500 )
 [node name="LandingPad2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 760, 500 )
 
-[node name="UI" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-theme = ExtResource( 7 )
+[node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource( 6 )
 
 [node name="BackToLevelSelect" type="Button" parent="UI"]
@@ -52,10 +49,15 @@ margin_right = 692.0
 margin_bottom = 230.0
 text = "Restart"
 
+[node name="Counter" parent="UI" instance=ExtResource( 7 )]
+startFuel = 1000
+
 [node name="ArrowsUp" type="Sprite" parent="."]
 position = Vector2( 307, 279 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 5 )
 
+[connection signal="emitFuel" from="Player" to="UI/Counter" method="decreaseFuel"]
 [connection signal="button_up" from="UI/BackToLevelSelect" to="UI" method="_on_BackToLevelSelect_button_up"]
 [connection signal="button_up" from="UI/Restart" to="UI" method="_on_Restart_button_up"]
+[connection signal="fuelEmpty" from="UI/Counter" to="Player" method="_onFuelEmpty"]
