@@ -1,10 +1,15 @@
 extends Node
 
 var player: Player = null
+var lastTime := 0.0
+var lastFuel := 0
+var maximumTime := 0.0
+var minimumFuel := 0
 
-var UI: CanvasLayer = null
-onready var landing_result_label: PackedScene = preload("res://scenes/UI/LandingResultLabel.tscn")
 onready var sfx_exposion: PackedScene = preload("res://scenes/SFX/Explosion.tscn")
+
+signal wonLevel
+signal failedLevel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,45 +18,34 @@ func _ready():
 
 func landing(landing_velocity: float):
 	if landing_velocity <= 10:
-		self.perfect_landing()
+		self.goodLanding(1)
 	
 	elif landing_velocity < 25:
-		self.good_landing()
+		self.goodLanding(0)
 	
 	else:
 		self.failure_landing()
-
-func perfect_landing():
-	var landing_label: Label = self._create_landing_popup()
-	landing_label.text = "Perfect landing!"
-	UI.level_finished()
-
-func good_landing():
-	var landing_label: Label = self._create_landing_popup()
-	landing_label.text = "Nice landing!"
-	UI.level_finished()
+	
+func goodLanding(baseScore: int) -> void:
+	var score = baseScore
+	
+	if lastTime <= maximumTime:
+		score += 1
+	
+	if lastFuel >= minimumFuel:
+		score += 1 
+	
+	emit_signal("wonLevel", score)	
 
 func failure_landing():
-	var landing_label: Label = self._create_landing_popup()
-	landing_label.text = "Lithobraking!"
-	
 	self.create_explosion()
 	player.call_deferred("free")
-	UI.level_finished()
+	emit_signal("failedLevel", "Lithobraking!")
 
 func total_failure():
-	var landing_label: Label = self._create_landing_popup()
-	landing_label.text = "Ups..."
-	
 	self.create_explosion()
 	player.call_deferred("free")
-	UI.level_finished()
-
-func _create_landing_popup():
-	var _label = landing_result_label.instance()
-	get_tree().current_scene.add_child(_label)
-	_label.rect_global_position += player.global_position + Vector2(0, -100)
-	return _label
+	emit_signal("failedLevel", "Oops...")
 
 func create_explosion():
 	var _exposion = sfx_exposion.instance()
