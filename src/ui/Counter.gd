@@ -16,7 +16,7 @@ func _ready() -> void:
 	_setFuelLabel()
 
 func _process(_delta: float) -> void:
-	var ticks = OS.get_ticks_msec()
+	var ticks = OS.get_ticks_msec() - _startTicks
 	var secs = ticks / 1000;
 	var mins = secs / 60;
 	secs = secs % 60;
@@ -26,6 +26,7 @@ func _process(_delta: float) -> void:
 func decreaseFuel() -> void:
 	if _currentFuel <= 0:
 		emit_signal("fuelEmpty")
+		pass
 	_currentFuel -= 1;
 	_setFuelLabel()
 	

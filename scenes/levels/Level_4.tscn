@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
+[ext_resource path="res://scenes/level_elements/StartingPad.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/level_elements/Ground.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/UI/Counter.tscn" type="PackedScene" id=4]
@@ -18,30 +19,31 @@ extents = Vector2( 32, 8 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 16, 8 )
 
-[node name="Level_3" type="Node2D"]
+[node name="Level_4" type="Node2D"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -19.0
-margin_top = -13.0
+margin_top = -12.0
 margin_right = 1314.0
-margin_bottom = 655.0
+margin_bottom = 656.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="Ground" parent="." instance=ExtResource( 3 )]
 
 [node name="CollisionPolygon2D" parent="Ground" index="0"]
-polygon = PoolVector2Array( -41, 533, 58, 389, 205, 341, 360, 364, 359, 406, 271, 389, 160, 391, 201, 488, 240, 489, 241, 474, 273, 488, 319, 557, 393, 526, 456, 490, 493, 572, 575, 613, 661, 615, 652, 553, 581, 517, 574, 466, 682, 432, 740, 362, 785, 349, 843, 377, 905, 451, 905, 468, 1010, 469, 1011, 448, 1107, 446, 1203, 373, 1318, 415, 1323, 665, -35, 666 )
+position = Vector2( 2, -4 )
+polygon = PoolVector2Array( -84, 63, -71, -65, 235.383, -60.3418, 398.65, -57.8595, 657.226, -53.9281, 1116.86, -46.9399, 1376, -43, 1401, 220, 1248, 158, 1224, 131, 1174, 112, 1193, 158, 1170, 155, 1155, 138, 1138, 149, 1173, 187, 1176, 207, 1159, 218, 1146, 236, 1122, 235, 1101, 220, 1094, 174, 1076, 146, 1028, 134, 998, 196, 938, 198, 845, 169, 739, 152, 719, 126, 715, 245, 752, 247, 752, 260, 823, 258, 819, 268, 738, 281, 701, 247, 705, 114, 719, 87, 512, 88, 403, 94, 434, 182, 458, 190, 557, 190, 551, 245, 493, 400, 429, 375, 398, 312, 368, 270, 343, 258, 321, 270, 319, 300, 263, 368, 246, 383, 206, 391, 178, 377, 164, 356, 147, 308, 124, 294, 98, 300, 71, 304, 57, 287, 57, 246, 143, 246, 145, 259, 183, 257, 183, 245, 257, 155, 110, 129, 112, 97, 88, 92, 95, 67, 73, 53, 64, 30 )
 
 [node name="LandingPad" parent="." instance=ExtResource( 12 )]
-position = Vector2( 957, 458 )
+position = Vector2( 506, 179 )
 
 [node name="CollisionShape2D" parent="LandingPad" index="0"]
 shape = SubResource( 1 )
 
 [node name="LandingPad2" parent="." instance=ExtResource( 12 )]
-position = Vector2( 617, 606 )
+position = Vector2( 787, 249 )
 
 [node name="CollisionShape2D" parent="LandingPad2" index="0"]
 shape = SubResource( 2 )
@@ -51,7 +53,7 @@ scale = Vector2( 2, 2 )
 frame = 1
 
 [node name="LandingPad3" parent="." instance=ExtResource( 12 )]
-position = Vector2( 221, 480 )
+position = Vector2( 163, 247 )
 
 [node name="CollisionShape2D" parent="LandingPad3" index="0"]
 shape = SubResource( 3 )
@@ -60,10 +62,11 @@ shape = SubResource( 3 )
 scale = Vector2( 1, 2 )
 frame = 2
 
+[node name="StartingPad" parent="." instance=ExtResource( 1 )]
+position = Vector2( 610, 610 )
+
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 90, 80 )
-rotation = -1.5708
-linear_velocity = Vector2( 100, 0 )
+position = Vector2( 605, 585 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource( 6 )
