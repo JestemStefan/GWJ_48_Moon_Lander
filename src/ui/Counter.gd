@@ -19,8 +19,10 @@ func _process(_delta: float) -> void:
 	var ticks = OS.get_ticks_msec() - _startTicks
 	var secs = ticks / 1000;
 	var mins = secs / 60;
-	secs = secs % 60;
 	
+	GameManager.lastTime = secs;
+	
+	secs = secs % 60;
 	_timeLabel.text = String(mins).pad_zeros(2) + ":" + String(secs).pad_zeros(2)
 	
 func decreaseFuel() -> void:
@@ -28,6 +30,7 @@ func decreaseFuel() -> void:
 		emit_signal("fuelEmpty")
 		pass
 	_currentFuel -= 1;
+	GameManager.lastFuel = _currentFuel
 	_setFuelLabel()
 	
 func _setFuelLabel() -> void:
