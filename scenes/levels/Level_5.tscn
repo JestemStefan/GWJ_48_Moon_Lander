@@ -18,30 +18,30 @@ extents = Vector2( 32, 8 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 16, 8 )
 
-[node name="Level_3" type="Node2D"]
+[node name="Level_5" type="Node2D"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -19.0
-margin_top = -13.0
+margin_top = -12.0
 margin_right = 1314.0
-margin_bottom = 655.0
+margin_bottom = 656.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="Ground" parent="." instance=ExtResource( 3 )]
 
 [node name="CollisionPolygon2D" parent="Ground" index="0"]
-polygon = PoolVector2Array( -41, 533, 58, 389, 205, 341, 360, 364, 359, 406, 271, 389, 160, 391, 201, 488, 240, 489, 241, 474, 273, 488, 319, 557, 393, 526, 456, 490, 493, 572, 575, 613, 661, 615, 652, 553, 581, 517, 574, 466, 682, 432, 740, 362, 785, 349, 843, 377, 905, 451, 905, 468, 1010, 469, 1011, 448, 1107, 446, 1203, 373, 1318, 415, 1323, 665, -35, 666 )
+polygon = PoolVector2Array( 1190, 1, 1200, -77, 1339, -84, 1396, 38, 1360, 678, -36, 692, 7, 637, 110, 602, 249, 600, 254, 619, 351, 619, 355, 598, 1340, 597, 1352, -4, 1323, -37, 1207, -33, 1181, 437, 1191, 469, 1155, 425, 1155, 448, 1146, 427, 1134, 455, 1123, 423, 1106, 445, 1086, 423, 1077, 443, 1059, 421, 1063, 442, 1041, 421, 1030, 452, 1014, 420, 1001, 449, 987, 419, 972, 448, 962, 421, 954, 447, 945, 422, 939, 439, 929, 421, 924, 445, 916, 413, 889, 489, 884, 385, 866, 355, 870, 316, 859, 282, 860, 244, 853, 207, 837, 167, 813, 146, 807, 113, 786, 93, 786, 66, 767, 59, 703, 36, 668, 30, 639, 36, 608, 48, 624, 73, 582, 56, 510, 90, 477, 71, 440, 75, 400, 103, 373, 109, 359, 134, 340, 166, 347, 199, 370, 199, 387, 290, 427, 393, 386, 413, 358, 458, 388, 501, 346, 477, 310, 443, 281, 475, 260, 457, 235, 454, 207, 474, 157, 455, 172, 281, 197, 142, 228, 148, 260, 133, 262, 113, 269, 88, 249, 71, 228, 54, 199, 58, 9, 58, 13, 616, -7, 670, -53, 685, -43, 137, -39, 52, 0, 2, 794, 14 )
 
 [node name="LandingPad" parent="." instance=ExtResource( 12 )]
-position = Vector2( 957, 458 )
+position = Vector2( 302, 607 )
 
 [node name="CollisionShape2D" parent="LandingPad" index="0"]
 shape = SubResource( 1 )
 
 [node name="LandingPad2" parent="." instance=ExtResource( 12 )]
-position = Vector2( 617, 606 )
+position = Vector2( 613, 172 )
 
 [node name="CollisionShape2D" parent="LandingPad2" index="0"]
 shape = SubResource( 2 )
@@ -51,7 +51,7 @@ scale = Vector2( 2, 2 )
 frame = 1
 
 [node name="LandingPad3" parent="." instance=ExtResource( 12 )]
-position = Vector2( 221, 480 )
+position = Vector2( 88, 164 )
 
 [node name="CollisionShape2D" parent="LandingPad3" index="0"]
 shape = SubResource( 3 )
@@ -61,9 +61,8 @@ scale = Vector2( 1, 2 )
 frame = 2
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 90, 80 )
-rotation = -1.5708
-linear_velocity = Vector2( 100, 0 )
+position = Vector2( 1240, 92 )
+rotation = 3.14159
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource( 6 )
@@ -93,7 +92,7 @@ stream = ExtResource( 9 )
 stream = ExtResource( 10 )
 
 [node name="Counter" parent="UI" instance=ExtResource( 4 )]
-startFuel = 1000
+startFuel = 2000
 
 [connection signal="emitFuel" from="Player" to="UI/Counter" method="decreaseFuel"]
 [connection signal="button_down" from="UI/BackToLevelSelect" to="UI" method="_on_BackToLevelSelect_button_down"]
