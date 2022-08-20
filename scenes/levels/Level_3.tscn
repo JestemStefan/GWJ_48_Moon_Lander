@@ -1,0 +1,134 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://src/player/Player.gd" type="Script" id=1]
+[ext_resource path="res://scenes/player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/level_elements/Ground.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/UI/Counter.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/level_elements/Ground.gd" type="Script" id=5]
+[ext_resource path="res://src/ui/UI.gd" type="Script" id=6]
+[ext_resource path="res://src/ui/Counter.gd" type="Script" id=7]
+[ext_resource path="res://art/themes/MainTheme.tres" type="Theme" id=8]
+[ext_resource path="res://sound/sfx/Menu1_NavA.wav" type="AudioStream" id=9]
+[ext_resource path="res://sound/sfx/Menu1_SelectA.wav" type="AudioStream" id=10]
+[ext_resource path="res://art/moon_texture.png" type="Texture" id=11]
+[ext_resource path="res://scenes/level_elements/LandingPad.tscn" type="PackedScene" id=12]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 48, 8 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32, 8 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 16, 8 )
+
+[node name="Level_3" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -19.0
+margin_top = -13.0
+margin_right = 1314.0
+margin_bottom = 655.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Ground" parent="." instance=ExtResource( 3 )]
+script = ExtResource( 5 )
+
+[node name="CollisionPolygon2D" parent="Ground" index="0"]
+polygon = PoolVector2Array( -41, 533, 58, 389, 205, 341, 360, 364, 359, 406, 271, 389, 160, 391, 201, 488, 240, 489, 241, 474, 273, 488, 319, 557, 393, 526, 456, 490, 493, 572, 575, 613, 661, 615, 652, 553, 581, 517, 574, 466, 682, 432, 740, 362, 785, 349, 843, 377, 905, 451, 905, 468, 1010, 469, 1011, 448, 1107, 446, 1203, 373, 1318, 415, 1323, 665, -35, 666 )
+
+[node name="Polygon2D" parent="Ground" index="1"]
+antialiased = true
+texture = ExtResource( 11 )
+texture_scale = Vector2( 0.5, 0.5 )
+texture_rotation_degrees = 6.6
+
+[node name="LandingPad" parent="." instance=ExtResource( 12 )]
+position = Vector2( 957, 458 )
+
+[node name="CollisionShape2D" parent="LandingPad" index="0"]
+shape = SubResource( 1 )
+
+[node name="LandingPad2" parent="." instance=ExtResource( 12 )]
+position = Vector2( 617, 606 )
+
+[node name="CollisionShape2D" parent="LandingPad2" index="0"]
+shape = SubResource( 2 )
+
+[node name="Sprite" parent="LandingPad2" index="1"]
+scale = Vector2( 2, 2 )
+frame = 1
+
+[node name="LandingPad3" parent="." instance=ExtResource( 12 )]
+position = Vector2( 221, 480 )
+
+[node name="CollisionShape2D" parent="LandingPad3" index="0"]
+shape = SubResource( 3 )
+
+[node name="Sprite" parent="LandingPad3" index="1"]
+scale = Vector2( 1, 2 )
+frame = 2
+
+[node name="Player" type="RigidBody2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 90, 80 )
+rotation = -1.5708
+mass = 100.0
+gravity_scale = 0.1
+contacts_reported = 2
+contact_monitor = true
+can_sleep = false
+linear_velocity = Vector2( 100, 0 )
+script = ExtResource( 1 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource( 6 )
+
+[node name="BackToLevelSelect" type="Button" parent="UI"]
+margin_left = 449.0
+margin_top = 259.0
+margin_right = 815.0
+margin_bottom = 287.0
+focus_mode = 0
+theme = ExtResource( 8 )
+enabled_focus_mode = 0
+text = "Back to level selection"
+
+[node name="Restart" type="Button" parent="UI"]
+margin_left = 570.0
+margin_top = 202.0
+margin_right = 692.0
+margin_bottom = 230.0
+theme = ExtResource( 8 )
+text = "Restart"
+
+[node name="HoverSFX" type="AudioStreamPlayer" parent="UI"]
+stream = ExtResource( 9 )
+
+[node name="ClickSFX" type="AudioStreamPlayer" parent="UI"]
+stream = ExtResource( 10 )
+
+[node name="Counter" type="Control" parent="UI" instance=ExtResource( 4 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -120.0
+margin_bottom = 69.0
+theme = ExtResource( 8 )
+script = ExtResource( 7 )
+startFuel = 1000
+
+[connection signal="body_entered" from="Player" to="Player" method="_on_Player_body_entered"]
+[connection signal="emitFuel" from="Player" to="UI/Counter" method="decreaseFuel"]
+[connection signal="button_down" from="UI/BackToLevelSelect" to="UI" method="_on_BackToLevelSelect_button_down"]
+[connection signal="button_up" from="UI/BackToLevelSelect" to="UI" method="_on_BackToLevelSelect_button_up"]
+[connection signal="mouse_entered" from="UI/BackToLevelSelect" to="UI" method="_on_BackToLevelSelect_mouse_entered"]
+[connection signal="button_down" from="UI/Restart" to="UI" method="_on_Restart_button_down"]
+[connection signal="button_up" from="UI/Restart" to="UI" method="_on_Restart_button_up"]
+[connection signal="mouse_entered" from="UI/Restart" to="UI" method="_on_Restart_mouse_entered"]
+[connection signal="fuelEmpty" from="UI/Counter" to="Player" method="_onFuelEmpty"]
+
+[editable path="Ground"]
+[editable path="LandingPad"]
+[editable path="LandingPad2"]
+[editable path="LandingPad3"]

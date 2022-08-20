@@ -12,7 +12,7 @@ func level_finished():
 
 
 func _on_Restart_button_up():
-	get_tree().change_scene("res://scenes/levels/Tutorial.tscn")
+	get_tree().reload_current_scene()
 
 
 func _on_BackToLevelSelect_button_up():
