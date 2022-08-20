@@ -6,6 +6,8 @@ var UI: CanvasLayer = null
 onready var landing_result_label: PackedScene = preload("res://scenes/UI/LandingResultLabel.tscn")
 onready var sfx_exposion: PackedScene = preload("res://scenes/SFX/Explosion.tscn")
 
+signal wonLevel
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -22,13 +24,15 @@ func landing(landing_velocity: float):
 		self.failure_landing()
 
 func perfect_landing():
-	var landing_label: Label = self._create_landing_popup()
-	landing_label.text = "Perfect landing!"
+#	var landing_label: Label = self._create_landing_popup()
+#	landing_label.text = "Perfect landing!"
+	emit_signal("wonLevel", 3)
 	UI.level_finished()
 
 func good_landing():
-	var landing_label: Label = self._create_landing_popup()
-	landing_label.text = "Nice landing!"
+#	var landing_label: Label = self._create_landing_popup()
+#	landing_label.text = "Nice landing!"
+	emit_signal("wonLevel", 2)
 	UI.level_finished()
 
 func failure_landing():
