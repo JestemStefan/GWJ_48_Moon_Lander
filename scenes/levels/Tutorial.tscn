@@ -65,43 +65,43 @@ stream = ExtResource( 11 )
 [node name="Counter" parent="UI" instance=ExtResource( 7 )]
 startFuel = 1000
 
-[node name="Control" type="Control" parent="."]
+[node name="TutorialGraphics" type="Control" parent="."]
 margin_left = 260.0
 margin_top = 407.0
 margin_right = 300.0
 margin_bottom = 447.0
 theme = ExtResource( 12 )
 
-[node name="ArrowsUp" type="Sprite" parent="Control"]
+[node name="ArrowsUp" type="Sprite" parent="TutorialGraphics"]
 position = Vector2( -100, -10 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 5 )
 
-[node name="Label" type="Label" parent="Control"]
+[node name="Label" type="Label" parent="TutorialGraphics"]
 margin_left = -58.0
 margin_top = -27.0
 margin_right = 84.0
 margin_bottom = 1.0
 text = "Engine"
 
-[node name="ArrowsLeft" type="Sprite" parent="Control"]
+[node name="ArrowsLeft" type="Sprite" parent="TutorialGraphics"]
 position = Vector2( -148, 39 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 8 )
 
-[node name="ArrowsRight" type="Sprite" parent="Control"]
+[node name="ArrowsRight" type="Sprite" parent="TutorialGraphics"]
 position = Vector2( -52, 39 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 9 )
 
-[node name="Label2" type="Label" parent="Control"]
+[node name="Label2" type="Label" parent="TutorialGraphics"]
 margin_left = -17.0
 margin_top = 25.0
 margin_right = 87.0
 margin_bottom = 53.0
 text = "Rotate"
 
-[node name="Label3" type="Label" parent="Control"]
+[node name="Label3" type="Label" parent="TutorialGraphics"]
 margin_left = 115.0
 margin_top = 167.0
 margin_right = 655.0
