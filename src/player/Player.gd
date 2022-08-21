@@ -82,13 +82,19 @@ func check_if_left_game_area():
 		GameManager.total_failure()
 
 
+func are_both_legs_on_pad():
+	return $LegRaycast.is_colliding() and $LegRaycast2.is_colliding()
+
+
 func _on_Player_body_entered(body):
 	if body is StartingPad and vel < 25:
 		return
 
-	elif body is LandingPad:
+	elif body is LandingPad and are_both_legs_on_pad():
 		if not is_landed:
 			is_landed = true
+			
+			
 			GameManager.landing(vel, body.stars)
 	
 	else:
@@ -96,5 +102,6 @@ func _on_Player_body_entered(body):
 
 func _onFuelEmpty():
 	noFuel = true
+
 
 
