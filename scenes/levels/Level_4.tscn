@@ -71,11 +71,11 @@ position = Vector2( 605, 585 )
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Counter" parent="UI" instance=ExtResource( 4 )]
-startFuel = 1000
+startFuel = 1200
 
 [node name="WinnerScreen" parent="UI" instance=ExtResource( 5 )]
 visible = false
-minimumFuelForStar = 400
+minimumFuelForStar = 600
 
 [connection signal="emitFuel" from="Player" to="UI/Counter" method="decreaseFuel"]
 [connection signal="fuelEmpty" from="UI/Counter" to="Player" method="_onFuelEmpty"]

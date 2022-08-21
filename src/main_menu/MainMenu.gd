@@ -32,7 +32,13 @@ func _on_ExitButton_mouse_entered():
 	$HoverSFX.play()
 
 
+func _on_CreditsButton_button_up():
+	get_tree().change_scene("res://scenes/menu/Credits.tscn")
 
 
+func _on_CreditsButton_button_down():
+	$ClickSFX.play()
 
 
+func _on_CreditsButton_mouse_entered():
+	$HoverSFX.play()
