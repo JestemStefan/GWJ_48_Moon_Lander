@@ -7,6 +7,7 @@ var maximumTime := 0.0
 var minimumFuel := 0
 
 onready var sfx_exposion: PackedScene = preload("res://scenes/SFX/Explosion.tscn")
+onready var confetti_scene: PackedScene = preload("res://art/confetti/Confetti.tscn")
 
 signal wonLevel
 signal failedLevel
@@ -35,6 +36,7 @@ func goodLanding(baseScore: int) -> void:
 	if lastFuel >= minimumFuel:
 		score += 1 
 	
+	self._create_confetti()
 	emit_signal("wonLevel", score)	
 
 func failure_landing():
@@ -52,3 +54,7 @@ func create_explosion():
 	get_tree().current_scene.add_child(_exposion)
 	_exposion.global_position = player.global_position
 	_exposion.emitting = true
+
+func _create_confetti():
+	var _confetti = confetti_scene.instance()
+	get_tree().current_scene.add_child(_confetti)

@@ -10,6 +10,7 @@ onready var fullTexture := preload("res://art/moon_full_star.png")
 onready var successLabel: Label = $Panel/CenterContainer/VBoxContainer/SuccessLabel
 onready var failureLabel: Label = $Panel/CenterContainer/VBoxContainer/FailureLabel
 
+
 export var maximumTimeForStar: float = 30
 export var minimumFuelForStar: int = 500
 
@@ -41,7 +42,6 @@ func failedLevel(msg: String) -> void:
 
 func onRestartButtonPressed():
 	$ClickSFX.play()
-	MusicManager.play_level_music()
 	get_tree().reload_current_scene()
 	
 

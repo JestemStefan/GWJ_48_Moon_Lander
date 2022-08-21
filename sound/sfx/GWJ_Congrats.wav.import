@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/GWJ_Congrats.wav-05e2ecd2c517120d3fb0da3f18223da1.sample"
+
+[deps]
+
+source_file="res://sound/sfx/GWJ_Congrats.wav"
+dest_files=[ "res://.import/GWJ_Congrats.wav-05e2ecd2c517120d3fb0da3f18223da1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
