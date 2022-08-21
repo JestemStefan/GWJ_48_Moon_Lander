@@ -30,7 +30,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 16, 8 )
+extents = Vector2( 20, 8 )
 
 [node name="Level_Tutorial" type="Node2D"]
 
@@ -75,7 +75,7 @@ stars = 3
 shape = SubResource( 4 )
 
 [node name="Sprite" parent="LandingPad3" index="1"]
-scale = Vector2( 1, 2 )
+scale = Vector2( 1.25, 2 )
 frames = SubResource( 3 )
 frame = 2
 

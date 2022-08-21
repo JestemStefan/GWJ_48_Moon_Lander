@@ -8,7 +8,7 @@
 [ext_resource path="res://scenes/UI/WinnerScreen.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 16, 8 )
+extents = Vector2( 20, 8 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 32, 8 )
@@ -36,18 +36,18 @@ polygon = PoolVector2Array( -39, 566, 7, 403, 82, 402, 127, 376, 161, 330, 205, 
 position = Vector2( 47, 395 )
 
 [node name="LandingPad3" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1048, 357 )
+position = Vector2( 1046, 363 )
 stars = 3
 
 [node name="CollisionShape2D" parent="LandingPad3" index="0"]
 shape = SubResource( 4 )
 
 [node name="Sprite" parent="LandingPad3" index="1"]
-scale = Vector2( 1, 2 )
+scale = Vector2( 1.25, 2 )
 frame = 2
 
 [node name="LandingPad2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 245, 476 )
+position = Vector2( 245, 481 )
 stars = 2
 
 [node name="CollisionShape2D" parent="LandingPad2" index="0"]
@@ -58,7 +58,7 @@ scale = Vector2( 2, 2 )
 frame = 1
 
 [node name="LandingPad" parent="." instance=ExtResource( 5 )]
-position = Vector2( 659, 509 )
+position = Vector2( 664, 515 )
 stars = 1
 
 [node name="CollisionShape2D" parent="LandingPad" index="0"]
