@@ -33,12 +33,14 @@ polygon = PoolVector2Array( -41, 533, 58, 389, 205, 341, 360, 364, 359, 406, 271
 
 [node name="LandingPad" parent="." instance=ExtResource( 12 )]
 position = Vector2( 957, 458 )
+stars = 1
 
 [node name="CollisionShape2D" parent="LandingPad" index="0"]
 shape = SubResource( 1 )
 
 [node name="LandingPad2" parent="." instance=ExtResource( 12 )]
 position = Vector2( 617, 606 )
+stars = 2
 
 [node name="CollisionShape2D" parent="LandingPad2" index="0"]
 shape = SubResource( 2 )
@@ -49,6 +51,7 @@ frame = 1
 
 [node name="LandingPad3" parent="." instance=ExtResource( 12 )]
 position = Vector2( 221, 480 )
+stars = 3
 
 [node name="CollisionShape2D" parent="LandingPad3" index="0"]
 shape = SubResource( 3 )
