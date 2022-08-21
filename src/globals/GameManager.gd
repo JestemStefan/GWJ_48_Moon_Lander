@@ -18,22 +18,19 @@ func _ready():
 
 func landing(landing_velocity: float, landing_stars: int):
 	if landing_velocity <= 10:
-		self.goodLanding(landing_stars + 1)
+		self.goodLanding(landing_stars, true)
 	
 	elif landing_velocity < 25:
-		self.goodLanding(landing_stars)
+		self.goodLanding(landing_stars, false)
 	
 	else:
 		self.failure_landing()
 	
-func goodLanding(baseScore: int) -> void:
-	var score = baseScore
-	
-	if lastFuel >= minimumFuel:
-		score += 1 
+func goodLanding(landing_stars: int, velocity_low: bool) -> void:
+	var enough_fuel = lastFuel >= minimumFuel
 	
 	self._create_confetti()
-	emit_signal("wonLevel", score)	
+	emit_signal("wonLevel", landing_stars, velocity_low, enough_fuel, lastTime)	
 
 func failure_landing():
 	self.create_explosion()

@@ -1,11 +1,11 @@
 extends Control
 
 onready var stars := [
-	$Panel/CenterContainer/VBoxContainer/HBoxContainer/Star1,
-	$Panel/CenterContainer/VBoxContainer/HBoxContainer/Star2,
-	$Panel/CenterContainer/VBoxContainer/HBoxContainer/Star3,
-	$Panel/CenterContainer/VBoxContainer/HBoxContainer/Star4,
-	$Panel/CenterContainer/VBoxContainer/HBoxContainer/Star5,
+	$Panel/CenterContainer/VBoxContainer/StarContainer/Star1,
+	$Panel/CenterContainer/VBoxContainer/StarContainer/Star2,
+	$Panel/CenterContainer/VBoxContainer/StarContainer/Star3,
+	$Panel/CenterContainer/VBoxContainer/StarContainer/Star4,
+	$Panel/CenterContainer/VBoxContainer/StarContainer/Star5,
 ]
 
 onready var fullTexture := preload("res://art/moon_full_star.png")
@@ -13,17 +13,43 @@ onready var successLabel: Label = $Panel/CenterContainer/VBoxContainer/SuccessLa
 onready var failureLabel: Label = $Panel/CenterContainer/VBoxContainer/FailureLabel
 onready var timeLabel: Label = $Panel/CenterContainer/VBoxContainer/TimeLabel
 
+onready var popup: Panel = $StarPopupPanel
+onready var popupContainer: Control = $StarPopupPanel/StarPopupContainer
+onready var popupEasyTarget: HBoxContainer = $StarPopupPanel/StarPopupContainer/VBoxContainer/EasyTarget
+onready var popupMediumTarget: HBoxContainer = $StarPopupPanel/StarPopupContainer/VBoxContainer/MediumTarget
+onready var popupHardTarget: HBoxContainer = $StarPopupPanel/StarPopupContainer/VBoxContainer/HardTarget
+onready var popupFuel: HBoxContainer = $StarPopupPanel/StarPopupContainer/VBoxContainer/Fuel
+onready var popupVelocity: HBoxContainer = $StarPopupPanel/StarPopupContainer/VBoxContainer/Velocity
+
 export var minimumFuelForStar: int = 500
+
+var won := false
 
 func _ready():
 	GameManager.connect("wonLevel", self, "wonLevel")
 	GameManager.connect("failedLevel", self, "failedLevel")
 	GameManager.minimumFuel = minimumFuelForStar
-
-func wonLevel(score: int) -> void:
+	popupFuel.get_node("Label").text = "Fuel >" + String(minimumFuelForStar)
+	
+func wonLevel(landingScore: int, velocityScore: bool, fuelScore: bool, time: int) -> void:
+	var score = landingScore + int(velocityScore) + int(fuelScore)
 	successLabel.visible = true
+	won = true
+	
+	if landingScore > 2:
+		popupHardTarget.visible = true
+	elif landingScore > 1:
+		popupMediumTarget.visible = true
+	else:
+		popupEasyTarget.visible = true
+		
+	popupVelocity.visible = velocityScore
+	popupFuel.visible = fuelScore
+	
 	visible = true
-	updateTime(GameManager.lastTime)
+	popupContainer.emit_signal("item_rect_changed")
+	
+	updateTime(time)
 	showScore(score)
 
 func showScore(score: int) -> void:
@@ -42,10 +68,11 @@ func failedLevel(msg: String) -> void:
 	updateTime(GameManager.lastTime)
 	visible = true
 
-func updateTime(time: int) -> void:
-	var mins = time / 60
-	var secs = time % 60
-	timeLabel.text = String(mins).pad_zeros(2) + ":" + String(secs).pad_zeros(2)
+func updateTime(ticks: int) -> void:
+	var secs = ticks / 1000
+	var mins = secs / 60
+	secs = secs % 60
+	timeLabel.text = String(mins).pad_zeros(2) + ":" + String(secs).pad_zeros(2) + "." + String(ticks % 1000).pad_zeros(3)
 
 func onRestartButtonPressed():
 	$ClickSFX.play()
@@ -61,3 +88,12 @@ func onRestartMouseEntered():
 
 func onBackToLevelSelectMouseEntered():
 	$HoverSFX.play()
+
+func onStarContainerMouseEntered():
+	if won:
+		popupContainer.emit_signal("item_rect_changed")
+		popup.rect_size = popupContainer.rect_size
+		popup.visible = true
+	
+func onStarContainerMouseExited():
+	popup.visible = false
