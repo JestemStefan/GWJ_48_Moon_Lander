@@ -1,9 +1,79 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/main_menu/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://art/themes/LevelSelectTheme.tres" type="Theme" id=2]
 [ext_resource path="res://sound/sfx/Menu1_SelectA.wav" type="AudioStream" id=3]
 [ext_resource path="res://sound/sfx/Menu1_NavA.wav" type="AudioStream" id=4]
+[ext_resource path="res://art/background.png" type="Texture" id=5]
+[ext_resource path="res://art/moon_menu.png" type="Texture" id=6]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("MoonMenu:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 945, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("MoonMenu:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 283, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("MoonMenu:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "idel"
+length = 5.0
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("MoonMenu:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 945, -0.25, 0, 0.25, 0, 945, -0.25, 0, 0.25, 0, 945, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 2.5, 5 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("MoonMenu:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 283, -0.25, 0, 0.25, 0, 304, -0.25, 0, 0.25, 0, 283, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 2.5, 5 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("MoonMenu:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, -2, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1, 2, 3, 5 )
+}
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -15,6 +85,17 @@ script = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 5 )
+stretch_mode = 1
+
+[node name="MoonMenu" type="Sprite" parent="."]
+position = Vector2( 945, 283 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 6 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 margin_left = 240.0
@@ -56,6 +137,10 @@ stream = ExtResource( 4 )
 
 [node name="ClickSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/idel = SubResource( 2 )
 
 [connection signal="button_down" from="CenterContainer/VBoxContainer/StartButton" to="." method="_on_StartButton_button_down"]
 [connection signal="button_up" from="CenterContainer/VBoxContainer/StartButton" to="." method="_on_StartButton_button_up"]
