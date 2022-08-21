@@ -17,13 +17,14 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	var ticks = OS.get_ticks_msec() - _startTicks
+	GameManager.lastTime = ticks;
+	
 	var secs = ticks / 1000;
 	var mins = secs / 60;
-	
-	GameManager.lastTime = secs;
-	
 	secs = secs % 60;
-	_timeLabel.text = String(mins).pad_zeros(2) + ":" + String(secs).pad_zeros(2)
+	ticks = ticks % 1000;
+	
+	_timeLabel.text = String(mins).pad_zeros(2) + ":" + String(secs).pad_zeros(2) + "." + String(ticks).pad_zeros(3)
 	
 func decreaseFuel() -> void:
 	if _currentFuel <= 0:
