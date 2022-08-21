@@ -24,6 +24,8 @@ func _ready():
 
 
 func _process(delta):
+	self.check_if_left_game_area()
+	
 	dir = Vector2.ZERO
 	vel = linear_velocity.length()
 	$Label.text = "Velocity = " + str(int(vel))
@@ -71,6 +73,15 @@ func _play_engine_sfx(is_engine_on):
 	else:
 		engine_sfx.stop()
 
+
+func check_if_left_game_area():
+	if global_position.x < -8 or global_position.x > 1288:
+		GameManager.total_failure()
+	
+	if global_position.y < -8 or global_position.y > 648:
+		GameManager.total_failure()
+
+
 func _on_Player_body_entered(body):
 	if body is StartingPad and vel < 25:
 		return
@@ -85,3 +96,5 @@ func _on_Player_body_entered(body):
 
 func _onFuelEmpty():
 	noFuel = true
+
+
