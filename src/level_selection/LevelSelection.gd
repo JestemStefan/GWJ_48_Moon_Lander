@@ -12,28 +12,33 @@ func _ready():
 
 
 func _on_Level_1_button_up():
-	get_tree().change_scene("res://scenes/levels/Tutorial.tscn")
 	MusicManager.play_level_music()
+	get_tree().change_scene("res://scenes/levels/Tutorial.tscn")
+	
 
 
 func _on_Level_2_button_up():
-	get_tree().change_scene("res://scenes/levels/Level_2.tscn")
 	MusicManager.play_level_music()
+	get_tree().change_scene("res://scenes/levels/Level_2.tscn")
+	
 
 
 func _on_Level_3_button_up():
-	get_tree().change_scene("res://scenes/levels/Level_3.tscn")
 	MusicManager.play_level_music()
+	get_tree().change_scene("res://scenes/levels/Level_3.tscn")
+	
 
 
 func _on_Level_4_button_up():
-	get_tree().change_scene("res://scenes/levels/Level_4.tscn")
 	MusicManager.play_level_music()
+	get_tree().change_scene("res://scenes/levels/Level_4.tscn")
+	
 
 
 func _on_Level_5_button_up():
-	get_tree().change_scene("res://scenes/levels/Level_5.tscn")
 	MusicManager.play_level_music()
+	get_tree().change_scene("res://scenes/levels/Level_5.tscn")
+	
 
 
 func _on_Level_1_mouse_entered():
