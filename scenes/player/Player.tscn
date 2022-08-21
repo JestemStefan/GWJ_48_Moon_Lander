@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://art/lander.png" type="Texture" id=2]
 [ext_resource path="res://sound/sfx/Game_Sound_Rocket_normal.ogg" type="AudioStream" id=3]
 [ext_resource path="res://sound/sfx/sfx_hiss.wav" type="AudioStream" id=4]
+[ext_resource path="res://art/themes/MainTheme.tres" type="Theme" id=5]
 
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 8, 9 )
@@ -101,11 +102,13 @@ position = Vector2( 0, 11.5 )
 shape = SubResource( 13 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = -31.0
-margin_top = -47.0
-margin_right = 31.0
-margin_bottom = -33.0
-text = "Velocity = 0"
+margin_left = -34.0
+margin_top = -32.0
+margin_right = 100.0
+margin_bottom = -4.0
+rect_scale = Vector2( 0.5, 0.5 )
+theme = ExtResource( 5 )
+text = "Vel = 0.0"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )

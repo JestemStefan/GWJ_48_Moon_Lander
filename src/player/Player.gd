@@ -28,7 +28,7 @@ func _process(delta):
 	
 	dir = Vector2.ZERO
 	vel = linear_velocity.length()
-	$Label.text = "Velocity = " + str(int(vel))
+	$Label.text = "Vel = " + str(stepify(vel, 0.1))
 	
 	var input = self._get_input()
 	var is_engine_on: bool = input.y > 0 and not noFuel
