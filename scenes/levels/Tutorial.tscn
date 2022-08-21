@@ -139,7 +139,7 @@ margin_left = -15.0
 margin_top = 185.0
 margin_right = 699.0
 margin_bottom = 213.0
-text = "Land with more then 500 fuel"
+text = "Land with more then 50% of fuel"
 
 [node name="MoonFullStar" type="Sprite" parent="TutorialGraphics"]
 position = Vector2( 578, 91 )

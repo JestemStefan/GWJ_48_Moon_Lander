@@ -79,3 +79,15 @@ func _on_Level_4_button_down():
 
 func _on_Level_5_button_down():
 	$ClickSFX.play()
+
+
+func _on_BacktoMenu_button_up():
+	get_tree().change_scene("res://scenes/menu/MainMenu.tscn")
+
+
+func _on_BacktoMenu_button_down():
+	$ClickSFX.play()
+
+
+func _on_BacktoMenu_mouse_entered():
+	$HoverSFX.play()

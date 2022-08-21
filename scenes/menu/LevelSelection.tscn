@@ -80,6 +80,13 @@ stream = ExtResource( 4 )
 [node name="ClickSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 
+[node name="BacktoMenu" type="Button" parent="."]
+margin_left = 963.0
+margin_top = 541.0
+margin_right = 1161.0
+margin_bottom = 569.0
+text = "Back to menu"
+
 [connection signal="button_down" from="Level_1" to="." method="_on_Level_1_button_down"]
 [connection signal="button_up" from="Level_1" to="." method="_on_Level_1_button_up"]
 [connection signal="mouse_entered" from="Level_1" to="." method="_on_Level_1_mouse_entered"]
@@ -95,3 +102,6 @@ stream = ExtResource( 3 )
 [connection signal="button_down" from="Level_5" to="." method="_on_Level_5_button_down"]
 [connection signal="button_up" from="Level_5" to="." method="_on_Level_5_button_up"]
 [connection signal="mouse_entered" from="Level_5" to="." method="_on_Level_5_mouse_entered"]
+[connection signal="button_down" from="BacktoMenu" to="." method="_on_BacktoMenu_button_down"]
+[connection signal="button_up" from="BacktoMenu" to="." method="_on_BacktoMenu_button_up"]
+[connection signal="mouse_entered" from="BacktoMenu" to="." method="_on_BacktoMenu_mouse_entered"]
