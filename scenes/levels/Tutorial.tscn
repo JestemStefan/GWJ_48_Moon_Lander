@@ -1,18 +1,37 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/level_elements/LandingPad.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/level_elements/Ground.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/level_elements/StartingPad.tscn" type="PackedScene" id=4]
 [ext_resource path="res://art/arrows_up.png" type="Texture" id=5]
+[ext_resource path="res://src/landing_pads/LandingPad.gd" type="Script" id=6]
 [ext_resource path="res://scenes/UI/Counter.tscn" type="PackedScene" id=7]
 [ext_resource path="res://art/arrows_left.png" type="Texture" id=8]
 [ext_resource path="res://art/arrows_right.png" type="Texture" id=9]
+[ext_resource path="res://art/moon_full_star.png" type="Texture" id=10]
+[ext_resource path="res://art/landing_pad_hard.png" type="Texture" id=11]
 [ext_resource path="res://art/themes/MainTheme.tres" type="Theme" id=12]
 [ext_resource path="res://scenes/UI/WinnerScreen.tscn" type="PackedScene" id=13]
+[ext_resource path="res://art/landing_pad_easy.png" type="Texture" id=14]
+[ext_resource path="res://art/landing_pad_medium.png" type="Texture" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 48, 8 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32, 8 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 16, 8 )
 
 [node name="Level_Tutorial" type="Node2D"]
 
@@ -25,9 +44,6 @@ margin_right = 1314.0
 margin_bottom = 655.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 522, 474 )
-
 [node name="Ground" parent="." instance=ExtResource( 3 )]
 
 [node name="StartingPad" parent="." instance=ExtResource( 4 )]
@@ -38,6 +54,33 @@ position = Vector2( 760, 500 )
 
 [node name="CollisionShape2D" parent="LandingPad" index="0"]
 shape = SubResource( 1 )
+
+[node name="LandingPad2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 928, 436 )
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" parent="LandingPad2" index="0"]
+shape = SubResource( 2 )
+
+[node name="Sprite" parent="LandingPad2" index="1"]
+scale = Vector2( 2, 2 )
+frames = SubResource( 3 )
+frame = 1
+
+[node name="LandingPad3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1063, 365 )
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" parent="LandingPad3" index="0"]
+shape = SubResource( 4 )
+
+[node name="Sprite" parent="LandingPad3" index="1"]
+scale = Vector2( 1, 2 )
+frames = SubResource( 3 )
+frame = 2
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 522, 474 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -86,13 +129,54 @@ margin_bottom = 53.0
 text = "Rotate"
 
 [node name="Label3" type="Label" parent="TutorialGraphics"]
-margin_left = 115.0
-margin_top = 167.0
-margin_right = 655.0
-margin_bottom = 195.0
-text = "Land on the other platform SLOWLY"
+margin_left = -15.0
+margin_top = 141.0
+margin_right = 699.0
+margin_bottom = 169.0
+text = "Land on the other platform with velocity < 10"
+
+[node name="Label4" type="Label" parent="TutorialGraphics"]
+margin_left = -15.0
+margin_top = 185.0
+margin_right = 699.0
+margin_bottom = 213.0
+text = "Land with more then 500 fuel"
+
+[node name="MoonFullStar" type="Sprite" parent="TutorialGraphics"]
+position = Vector2( 578, 91 )
+texture = ExtResource( 10 )
+
+[node name="MoonFullStar7" type="Sprite" parent="TutorialGraphics"]
+position = Vector2( -45, 155 )
+texture = ExtResource( 10 )
+
+[node name="MoonFullStar8" type="Sprite" parent="TutorialGraphics"]
+position = Vector2( -45, 201 )
+texture = ExtResource( 10 )
+
+[node name="MoonFullStar2" type="Sprite" parent="TutorialGraphics"]
+position = Vector2( 724, 28 )
+texture = ExtResource( 10 )
+
+[node name="MoonFullStar3" type="Sprite" parent="TutorialGraphics"]
+position = Vector2( 761, 28 )
+texture = ExtResource( 10 )
+
+[node name="MoonFullStar4" type="Sprite" parent="TutorialGraphics"]
+position = Vector2( 846, -42 )
+texture = ExtResource( 10 )
+
+[node name="MoonFullStar5" type="Sprite" parent="TutorialGraphics"]
+position = Vector2( 884, -42 )
+texture = ExtResource( 10 )
+
+[node name="MoonFullStar6" type="Sprite" parent="TutorialGraphics"]
+position = Vector2( 920, -42 )
+texture = ExtResource( 10 )
 
 [connection signal="emitFuel" from="Player" to="UI/Counter" method="decreaseFuel"]
 [connection signal="fuelEmpty" from="UI/Counter" to="Player" method="_onFuelEmpty"]
 
 [editable path="LandingPad"]
+[editable path="LandingPad2"]
+[editable path="LandingPad3"]

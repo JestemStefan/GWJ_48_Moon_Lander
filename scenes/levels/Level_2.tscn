@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/level_elements/LandingPad.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/UI/WinnerScreen.tscn" type="PackedScene" id=6]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 16, 8 )
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -27,9 +27,6 @@ margin_right = 1314.0
 margin_bottom = 655.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 48, 372 )
-
 [node name="Ground" parent="." instance=ExtResource( 2 )]
 
 [node name="CollisionPolygon2D" parent="Ground" index="0"]
@@ -38,21 +35,11 @@ polygon = PoolVector2Array( -39, 566, 7, 403, 82, 402, 127, 376, 161, 330, 205, 
 [node name="StartingPad" parent="." instance=ExtResource( 3 )]
 position = Vector2( 47, 395 )
 
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="Counter" parent="UI" instance=ExtResource( 4 )]
-startFuel = 1000
-
-[node name="WinnerScreen" parent="UI" instance=ExtResource( 6 )]
-visible = false
-maximumTimeForStar = 45.0
-minimumFuelForStar = 400
-
 [node name="LandingPad3" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1048, 357 )
 
 [node name="CollisionShape2D" parent="LandingPad3" index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
 [node name="Sprite" parent="LandingPad3" index="1"]
 scale = Vector2( 1, 2 )
@@ -74,8 +61,21 @@ position = Vector2( 659, 509 )
 [node name="CollisionShape2D" parent="LandingPad" index="0"]
 shape = SubResource( 3 )
 
-[connection signal="emitFuel" from="Player" to="UI/Counter" method="decreaseFuel"]
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Counter" parent="UI" instance=ExtResource( 4 )]
+startFuel = 1000
+
+[node name="WinnerScreen" parent="UI" instance=ExtResource( 6 )]
+visible = false
+maximumTimeForStar = 45.0
+minimumFuelForStar = 400
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 48, 372 )
+
 [connection signal="fuelEmpty" from="UI/Counter" to="Player" method="_onFuelEmpty"]
+[connection signal="emitFuel" from="Player" to="UI/Counter" method="decreaseFuel"]
 
 [editable path="Ground"]
 [editable path="LandingPad3"]
