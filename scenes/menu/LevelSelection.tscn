@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://art/themes/LevelSelectTheme.tres" type="Theme" id=1]
 [ext_resource path="res://src/level_selection/LevelSelection.gd" type="Script" id=2]
 [ext_resource path="res://sound/sfx/Menu1_SelectA.wav" type="AudioStream" id=3]
 [ext_resource path="res://sound/sfx/Menu1_NavA.wav" type="AudioStream" id=4]
+[ext_resource path="res://art/background.png" type="Texture" id=5]
 
 [node name="LevelSelection" type="Control"]
 anchor_right = 1.0
@@ -15,6 +16,12 @@ script = ExtResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 5 )
+stretch_mode = 1
 
 [node name="Level_1" type="Button" parent="."]
 margin_left = 192.0
