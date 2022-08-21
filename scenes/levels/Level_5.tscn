@@ -33,12 +33,14 @@ polygon = PoolVector2Array( 1190, 1, 1200, -77, 1339, -84, 1396, 38, 1360, 678, 
 
 [node name="LandingPad" parent="." instance=ExtResource( 12 )]
 position = Vector2( 302, 607 )
+stars = 1
 
 [node name="CollisionShape2D" parent="LandingPad" index="0"]
 shape = SubResource( 1 )
 
 [node name="LandingPad2" parent="." instance=ExtResource( 12 )]
 position = Vector2( 613, 172 )
+stars = 2
 
 [node name="CollisionShape2D" parent="LandingPad2" index="0"]
 shape = SubResource( 2 )
@@ -49,6 +51,7 @@ frame = 1
 
 [node name="LandingPad3" parent="." instance=ExtResource( 12 )]
 position = Vector2( 88, 164 )
+stars = 3
 
 [node name="CollisionShape2D" parent="LandingPad3" index="0"]
 shape = SubResource( 3 )
@@ -68,7 +71,6 @@ startFuel = 2000
 
 [node name="WinnerScreen" parent="UI" instance=ExtResource( 1 )]
 visible = false
-maximumTimeForStar = 45.0
 minimumFuelForStar = 1000
 
 [connection signal="emitFuel" from="Player" to="UI/Counter" method="decreaseFuel"]

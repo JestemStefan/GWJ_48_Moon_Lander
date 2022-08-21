@@ -1,9 +1,8 @@
 extends Node
 
 var player: Player = null
-var lastTime := 0.0
+var lastTime := 0
 var lastFuel := 0
-var maximumTime := 0.0
 var minimumFuel := 0
 
 onready var sfx_exposion: PackedScene = preload("res://scenes/SFX/Explosion.tscn")
@@ -17,21 +16,18 @@ func _ready():
 	pass # Replace with function body.
 
 
-func landing(landing_velocity: float):
+func landing(landing_velocity: float, landing_stars: int):
 	if landing_velocity <= 10:
-		self.goodLanding(1)
+		self.goodLanding(landing_stars + 1)
 	
 	elif landing_velocity < 25:
-		self.goodLanding(0)
+		self.goodLanding(landing_stars)
 	
 	else:
 		self.failure_landing()
 	
 func goodLanding(baseScore: int) -> void:
 	var score = baseScore
-	
-	if lastTime <= maximumTime:
-		score += 1
 	
 	if lastFuel >= minimumFuel:
 		score += 1 

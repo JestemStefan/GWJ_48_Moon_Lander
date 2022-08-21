@@ -4,52 +4,57 @@ onready var stars := [
 	$Panel/CenterContainer/VBoxContainer/HBoxContainer/Star1,
 	$Panel/CenterContainer/VBoxContainer/HBoxContainer/Star2,
 	$Panel/CenterContainer/VBoxContainer/HBoxContainer/Star3,
+	$Panel/CenterContainer/VBoxContainer/HBoxContainer/Star4,
+	$Panel/CenterContainer/VBoxContainer/HBoxContainer/Star5,
 ]
 
 onready var fullTexture := preload("res://art/moon_full_star.png")
 onready var successLabel: Label = $Panel/CenterContainer/VBoxContainer/SuccessLabel
 onready var failureLabel: Label = $Panel/CenterContainer/VBoxContainer/FailureLabel
+onready var timeLabel: Label = $Panel/CenterContainer/VBoxContainer/TimeLabel
 
-
-export var maximumTimeForStar: float = 30
 export var minimumFuelForStar: int = 500
 
 func _ready():
 	GameManager.connect("wonLevel", self, "wonLevel")
 	GameManager.connect("failedLevel", self, "failedLevel")
-	GameManager.maximumTime = maximumTimeForStar
 	GameManager.minimumFuel = minimumFuelForStar
 
 func wonLevel(score: int) -> void:
 	successLabel.visible = true
 	visible = true
+	updateTime(GameManager.lastTime)
 	showScore(score)
 
 func showScore(score: int) -> void:
 	var tween := create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
 	
 	for n in score:
-		tween.tween_property(stars[n - 1], "texture", fullTexture, 0.1)
-		tween.tween_property(stars[n - 1], "rect_scale", Vector2(2, 2), 0.1)
-		tween.tween_property(stars[n - 1], "rect_rotation", 360.0, 0.75)
-		tween.parallel().tween_property(stars[n - 1], "rect_scale", Vector2(1, 1), 0.75)
+		tween.tween_property(stars[n], "texture", fullTexture, 0.1)
+		tween.tween_property(stars[n], "rect_scale", Vector2(2, 2), 0.1)
+		tween.tween_property(stars[n], "rect_rotation", 360.0, 0.75)
+		tween.parallel().tween_property(stars[n], "rect_scale", Vector2(1, 1), 0.75)
 		tween.tween_interval(0.5)
 
 func failedLevel(msg: String) -> void:
 	failureLabel.visible = true
 	failureLabel.text = msg
+	updateTime(GameManager.lastTime)
 	visible = true
+
+func updateTime(time: int) -> void:
+	var mins = time / 60
+	var secs = time % 60
+	timeLabel.text = String(mins).pad_zeros(2) + ":" + String(secs).pad_zeros(2)
 
 func onRestartButtonPressed():
 	$ClickSFX.play()
 	get_tree().reload_current_scene()
-	
 
 func onBackToLevelSelectButtonPressed():
 	$ClickSFX.play()
 	MusicManager.play_main_menu_music()
 	get_tree().change_scene("res://scenes/menu/LevelSelection.tscn")
-	
 
 func onRestartMouseEntered():
 	$HoverSFX.play()

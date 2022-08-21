@@ -89,7 +89,7 @@ func _on_Player_body_entered(body):
 	elif body is LandingPad:
 		if not is_landed:
 			is_landed = true
-			GameManager.landing(vel)
+			GameManager.landing(vel, body.stars)
 	
 	else:
 		GameManager.total_failure()

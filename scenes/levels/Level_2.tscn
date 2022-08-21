@@ -37,6 +37,7 @@ position = Vector2( 47, 395 )
 
 [node name="LandingPad3" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1048, 357 )
+stars = 3
 
 [node name="CollisionShape2D" parent="LandingPad3" index="0"]
 shape = SubResource( 4 )
@@ -47,6 +48,7 @@ frame = 2
 
 [node name="LandingPad2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 245, 476 )
+stars = 2
 
 [node name="CollisionShape2D" parent="LandingPad2" index="0"]
 shape = SubResource( 2 )
@@ -57,6 +59,7 @@ frame = 1
 
 [node name="LandingPad" parent="." instance=ExtResource( 5 )]
 position = Vector2( 659, 509 )
+stars = 1
 
 [node name="CollisionShape2D" parent="LandingPad" index="0"]
 shape = SubResource( 3 )
@@ -68,7 +71,6 @@ startFuel = 1000
 
 [node name="WinnerScreen" parent="UI" instance=ExtResource( 6 )]
 visible = false
-maximumTimeForStar = 45.0
 minimumFuelForStar = 400
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
