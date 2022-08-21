@@ -41,12 +41,15 @@ func failedLevel(msg: String) -> void:
 
 func onRestartButtonPressed():
 	$ClickSFX.play()
+	MusicManager.play_level_music()
 	get_tree().reload_current_scene()
+	
 
 func onBackToLevelSelectButtonPressed():
 	$ClickSFX.play()
-	get_tree().change_scene("res://scenes/menu/LevelSelection.tscn")
 	MusicManager.play_main_menu_music()
+	get_tree().change_scene("res://scenes/menu/LevelSelection.tscn")
+	
 
 func onRestartMouseEntered():
 	$HoverSFX.play()
