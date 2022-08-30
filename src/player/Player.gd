@@ -7,12 +7,13 @@ var vel: float
 var is_landed: bool = false
 var noFuel: bool = false
 
-onready var engine_particles: Particles2D = $EngineParticles
+onready var engine_particles: CPUParticles2D = $EngineParticles
 onready var engine_sfx: AudioStreamPlayer2D = $EngineSFX
+onready var engine_exhaust_ray: RayCast2D = $ExhaustRay
+onready var engine_exhaust_particles: Node2D = $ExhaustParticles
 
-
-onready var control_engine_particles_1: Particles2D = $ControlEngineParticles_1
-onready var control_engine_particles_2: Particles2D = $ControlEngineParticles_2
+onready var control_engine_particles_1: CPUParticles2D = $ControlEngineParticles_1
+onready var control_engine_particles_2: CPUParticles2D = $ControlEngineParticles_2
 onready var control_engine_sfx: AudioStreamPlayer2D = $ControlEginesSFX
 
 signal emitFuel
@@ -36,8 +37,8 @@ func _process(delta):
 	dir = Vector2.UP.rotated(rotation) * 60 if is_engine_on else Vector2.ZERO
 	engine_particles.emitting = is_engine_on
 	self._play_engine_sfx(is_engine_on)
+	self._spawn_exhaust_particles(is_engine_on)	
 	
-
 	self._rotate(input.x)
 	apply_central_impulse(dir)
 	
@@ -72,6 +73,21 @@ func _play_engine_sfx(is_engine_on):
 			engine_sfx.play(0.0)
 	else:
 		engine_sfx.stop()
+
+
+func _spawn_exhaust_particles(is_engine_on):
+	if is_engine_on and engine_exhaust_ray.is_colliding():
+		var collision_point = engine_exhaust_ray.get_collision_point()
+		engine_exhaust_particles.global_position = collision_point
+		
+		var collision_normal = engine_exhaust_ray.get_collision_normal()
+		engine_exhaust_particles.look_at(engine_exhaust_particles.global_position + collision_normal)
+		
+		engine_exhaust_particles.start_emitting()
+		
+	else:
+		engine_exhaust_particles.stop_emitting()
+	
 
 
 func check_if_left_game_area():

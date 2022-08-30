@@ -10,6 +10,7 @@ extends StaticBody2D
 func _ready():
 	var points = $CollisionPolygon2D.polygon
 	$Polygon2D.polygon = points
+	$Line2D.points = points
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://art/lander.png" type="Texture" id=2]
 [ext_resource path="res://sound/sfx/Game_Sound_Rocket_normal.ogg" type="AudioStream" id=3]
 [ext_resource path="res://sound/sfx/sfx_hiss.wav" type="AudioStream" id=4]
 [ext_resource path="res://art/themes/MainTheme.tres" type="Theme" id=5]
+[ext_resource path="res://src/effects/ExhaustParticles.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 8, 9 )
@@ -28,62 +29,19 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="Gradient" id=10]
-offsets = PoolRealArray( 0, 0.0709677, 0.174194, 0.374194, 1 )
-colors = PoolColorArray( 0, 0.750977, 1, 1, 1, 0.949408, 0.290323, 1, 1, 0.60082, 0.512097, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
-
-[sub_resource type="GradientTexture" id=11]
-gradient = SubResource( 10 )
-
 [sub_resource type="Curve" id=8]
 max_value = 2.0
 _data = [ Vector2( 0, 0.385227 ), 0.0, 0.0, 0, 0, Vector2( 0.0786517, 2 ), 0.0, 0.0, 0, 0, Vector2( 0.983146, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=9]
-curve = SubResource( 8 )
+[sub_resource type="Gradient" id=10]
+offsets = PoolRealArray( 0, 0.0709677, 0.174194, 0.374194, 1 )
+colors = PoolColorArray( 0, 0.750977, 1, 1, 1, 0.949408, 0.290323, 1, 1, 0.60082, 0.512097, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="ParticlesMaterial" id=7]
-emission_shape = 1
-emission_sphere_radius = 1.57
-flag_disable_z = true
-direction = Vector3( 0, 1, 0 )
-spread = 16.49
-gravity = Vector3( 0, 17, 0 )
-initial_velocity = 200.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-damping = 58.41
-damping_random = 0.41
-scale = 4.0
-scale_curve = SubResource( 9 )
-color_ramp = SubResource( 11 )
+[sub_resource type="Curve" id=14]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.732639, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="ParticlesMaterial" id=14]
-emission_shape = 1
-emission_sphere_radius = 1.57
-flag_disable_z = true
-direction = Vector3( -1, 0, 0 )
-spread = 16.49
-gravity = Vector3( 0, 17, 0 )
-initial_velocity = 200.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-damping = 58.41
-damping_random = 0.41
-scale_curve = SubResource( 9 )
-
-[sub_resource type="ParticlesMaterial" id=15]
-emission_shape = 1
-emission_sphere_radius = 1.57
-flag_disable_z = true
-spread = 16.49
-gravity = Vector3( 0, 17, 0 )
-initial_velocity = 200.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-damping = 58.41
-damping_random = 0.41
-scale_curve = SubResource( 9 )
+[sub_resource type="Gradient" id=15]
+colors = PoolColorArray( 0.327637, 0.327637, 0.327637, 1, 1, 1, 1, 1 )
 
 [node name="Player" type="RigidBody2D"]
 mass = 100.0
@@ -115,29 +73,57 @@ scale = Vector2( 2, 2 )
 frames = SubResource( 6 )
 animation = "Idle"
 
-[node name="EngineParticles" type="Particles2D" parent="."]
+[node name="EngineParticles" type="CPUParticles2D" parent="."]
 position = Vector2( 0, 11 )
+emitting = false
 amount = 128
 lifetime = 0.5
 explosiveness = 0.07
 local_coords = false
-process_material = SubResource( 7 )
+emission_shape = 1
+emission_sphere_radius = 1.57
+direction = Vector2( 0, 1 )
+spread = 16.49
+gravity = Vector2( 0, 17 )
+initial_velocity = 200.0
+damping = 58.41
+damping_random = 0.41
+scale_amount = 4.0
+scale_amount_curve = SubResource( 8 )
+color_ramp = SubResource( 10 )
 
-[node name="ControlEngineParticles_1" type="Particles2D" parent="."]
+[node name="ControlEngineParticles_1" type="CPUParticles2D" parent="."]
 position = Vector2( 1, 13 )
+emitting = false
 amount = 32
 lifetime = 0.2
 explosiveness = 0.07
 local_coords = false
-process_material = SubResource( 14 )
+emission_shape = 1
+emission_sphere_radius = 1.57
+direction = Vector2( -1, 0 )
+spread = 16.49
+gravity = Vector2( 0, 17 )
+initial_velocity = 200.0
+damping = 58.41
+damping_random = 0.41
+scale_amount_curve = SubResource( 8 )
 
-[node name="ControlEngineParticles_2" type="Particles2D" parent="."]
+[node name="ControlEngineParticles_2" type="CPUParticles2D" parent="."]
 position = Vector2( 0, -13 )
+emitting = false
 amount = 32
 lifetime = 0.2
 explosiveness = 0.07
 local_coords = false
-process_material = SubResource( 15 )
+emission_shape = 1
+emission_sphere_radius = 1.57
+spread = 16.49
+gravity = Vector2( 0, 17 )
+initial_velocity = 200.0
+damping = 58.41
+damping_random = 0.41
+scale_amount_curve = SubResource( 8 )
 
 [node name="EngineSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
@@ -156,5 +142,47 @@ position = Vector2( 12, 9 )
 enabled = true
 cast_to = Vector2( 0, 16 )
 collision_mask = 8
+
+[node name="ExhaustRay" type="RayCast2D" parent="."]
+position = Vector2( 0, 11 )
+enabled = true
+cast_to = Vector2( 0, 96 )
+
+[node name="ExhaustParticles" type="Node2D" parent="."]
+position = Vector2( 0, 108 )
+script = ExtResource( 6 )
+
+[node name="L_Exhaust" type="CPUParticles2D" parent="ExhaustParticles"]
+position = Vector2( 0, -1 )
+rotation = -1.5708
+emitting = false
+amount = 64
+local_coords = false
+direction = Vector2( -1, 0 )
+spread = 13.9
+gravity = Vector2( 0, -16 )
+initial_velocity = 100.0
+damping = 100.0
+damping_random = 0.73
+scale_amount = 8.0
+scale_amount_random = 0.68
+scale_amount_curve = SubResource( 14 )
+color_ramp = SubResource( 15 )
+
+[node name="R_Exhaust" type="CPUParticles2D" parent="ExhaustParticles"]
+position = Vector2( 0, -1 )
+rotation = -1.5708
+emitting = false
+amount = 64
+local_coords = false
+spread = 13.9
+gravity = Vector2( 0, -16 )
+initial_velocity = 100.0
+damping = 100.0
+damping_random = 0.73
+scale_amount = 8.0
+scale_amount_random = 0.68
+scale_amount_curve = SubResource( 14 )
+color_ramp = SubResource( 15 )
 
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
